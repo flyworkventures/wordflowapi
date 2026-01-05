@@ -1,0 +1,66 @@
+{
+    "enums": {
+        "level": {
+            "a0": "Neuling (A0)",
+            "a1": "Anfänger (A1)",
+            "a2": "Grundlagen (A2)",
+            "b1": "Mittelstufe (B1)",
+            "b2": "Obere Mittelstufe (B2)",
+            "c1": "Fortgeschritten (C1)",
+            "c2": "Experte (C2)"
+        },
+        "interests": {
+            "basic_information": "Grundlegende Informationen",
+            "travel": "Reisen",
+            "work": "Arbeit",
+            "food_and_drink": "Essen und Trinken",
+            "daily_tasks": "Tägliche Aufgaben",
+            "society": "Gesellschaft",
+            "popular_words": "Beliebte Wörter",
+            "city_transport": "Stadtverkehr",
+            "hobbies": "Hobbys",
+            "clothing_and_accessories": "Kleidung und Accessoires",
+            "nature_and_animals": "Natur und Tiere",
+            "relationships": "Beziehungen",
+            "sport_and_fitness": "Sport und Fitness"
+        }
+    },
+    "auth": {
+        "unauthorized": "Unbefugter Zugriff. Bitte loggen Sie sich ein.",
+        "user_not_found": "Benutzer nicht gefunden.",
+        "email_already_exists": "Diese E-Mail-Adresse wird bereits verwendet.",
+        "register_success": "Registrierung erfolgreich abgeschlossen.",
+        "please_login": "Bitte loggen Sie sich ein, um auf diese Ressource zuzugreifen.",
+        "invalid_social_token": "Social-Media-Authentifizierungstoken ist ungültig.",
+        "registration_failed_internal": "Registrierung aufgrund eines internen Fehlers fehlgeschlagen.",
+        "refresh_token_required": "Aktualisierungs-Token (Refresh Token) ist erforderlich.",
+        "token_refreshed": "Sitzung erfolgreich aktualisiert.",
+        "invalid_refresh_token": "Ungültiges oder abgelaufenes Aktualisierungs-Token.",
+        "guest_login_success": "Erfolgreich als Gast eingeloggt.",
+        "guest_login_failed": "Gast-Login fehlgeschlagen.",
+        "guest_device_id_required": "Geräte-ID ist für den Gast-Login erforderlich.",
+        "social_login_failed": "Verifizierung des Social-Media-Logins fehlgeschlagen.",
+        "user_no_longer_exists": "Der zu diesem Token gehörende Benutzer existiert nicht mehr."
+    },
+    "user": {
+        "profile_updated": "Profil erfolgreich aktualisiert.",
+        "account_deleted_success": "Ihr Konto wurde erfolgreich gelöscht.",
+        "no_data_to_update": "Keine Daten zur Aktualisierung bereitgestellt.",
+        "not_found": "Benutzer nicht gefunden."
+    },
+    "error": {
+        "internal_server": "Ein interner Serverfehler ist aufgetreten.",
+        "db_connection": "Fehler bei der Datenbankverbindung.",
+        "app_check_invalid": "App-Check-Verifizierung fehlgeschlagen.",
+        "already_exists": "Dieser Eintrag existiert bereits im System.",
+        "invalid_relation": "Die angegebene Datenbeziehung ist ungültig.",
+        "record_not_found": "Der angeforderte Datensatz wurde nicht gefunden.",
+        "database_error": "Ein Datenbankfehler ist aufgetreten.",
+        "integrity_missing": "Geräteintegritätsprüfung fehlgeschlagen oder Token fehlt.",
+        "user_creation_failed": "Benutzerdatensatz konnte nicht erstellt werden.",
+        "untrusted_device": "Dieses Gerät wird als nicht vertrauenswürdig oder kompromittiert eingestuft.",
+        "invalid_attestation": "Geräteattestierungsprüfung fehlgeschlagen.",
+        "too_many_requests": "Zu viele Anfragen von dieser IP, bitte versuchen Sie es später erneut.",
+        "validation_failed": "Validierung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben."
+    }
+}

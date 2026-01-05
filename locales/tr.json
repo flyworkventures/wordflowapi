@@ -1,0 +1,66 @@
+{
+    "enums": {
+        "level": {
+            "a0": "Sıfır (A0)",
+            "a1": "Başlangıç (A1)",
+            "a2": "Temel Seviye (A2)",
+            "b1": "Orta Seviye (B1)",
+            "b2": "Orta Üstü (B2)",
+            "c1": "İleri Seviye (C1)",
+            "c2": "Yetkin (C2)"
+        },
+        "interests": {
+            "basic_information": "Temel Bilgiler",
+            "travel": "Seyahat",
+            "work": "İş",
+            "food_and_drink": "Yiyecek ve İçecek",
+            "daily_tasks": "Günlük Görevler",
+            "society": "Toplum",
+            "popular_words": "Popüler Kelimeler",
+            "city_transport": "Şehir Ulaşımı",
+            "hobbies": "Hobiler",
+            "clothing_and_accessories": "Giyim ve Aksesuar",
+            "nature_and_animals": "Doğa ve Hayvanlar",
+            "relationships": "İlişkiler",
+            "sport_and_fitness": "Spor ve Fitness"
+        }
+    },
+    "auth": {
+        "unauthorized": "Yetkisiz erişim. Lütfen giriş yapınız.",
+        "user_not_found": "Kullanıcı bulunamadı.",
+        "email_already_exists": "Bu e-posta adresi zaten kullanımda.",
+        "register_success": "Kayıt işlemi başarıyla tamamlandı.",
+        "please_login": "Lütfen giriş yapınız.",
+        "invalid_social_token": "Sosyal medya doğrulama jetonu geçersiz.",
+        "registration_failed_internal": "Kayıt sırasında sistemsel bir hata oluştu.",
+        "refresh_token_required": "Yenileme jetonu (Refresh Token) gereklidir.",
+        "token_refreshed": "Oturum başarıyla yenilendi.",
+        "invalid_refresh_token": "Geçersiz veya süresi dolmuş yenileme jetonu.",
+        "guest_login_success": "Misafir girişi başarılı.",
+        "guest_login_failed": "Misafir girişi yapılamadı.",
+        "guest_device_id_required": "Misafir girişi için cihaz kimliği gerekli.",
+        "social_login_failed": "Sosyal medya girişi doğrulanamadı.",
+        "user_no_longer_exists": "Bu oturum anahtarına (token) sahip kullanıcı artık sistemde mevcut değil."
+    },
+    "user": {
+        "profile_updated": "Profil başarıyla güncellendi.",
+        "account_deleted_success": "Hesabınız başarıyla silindi.",
+        "no_data_to_update": "Güncellenecek veri sağlanmadı.",
+        "not_found": "Kullanıcı bulunamadı."
+    },
+    "error": {
+        "internal_server": "Sunucu tarafında bir hata oluştu.",
+        "db_connection": "Veritabanı bağlantı hatası oluştu.",
+        "app_check_invalid": "App Check doğrulaması başarısız oldu.",
+        "already_exists": "Bu hesap sistemde zaten mevcut.",
+        "invalid_relation": "Geçersiz veri ilişkisi sağlandı.",
+        "record_not_found": "İstenen kayıt bulunamadı.",
+        "database_error": "Veritabanı işlemi sırasında bir hata oluştu.",
+        "integrity_missing": "Cihaz doğrulanamadı veya jeton eksik.",
+        "user_creation_failed": "Kullanıcı kaydı oluşturulamadı.",
+        "untrusted_device": "Bu cihaz güvenli bulunmadı veya üzerinde değişiklik yapılmış.",
+        "invalid_attestation": "Cihaz tasdik (attestation) doğrulaması başarısız oldu.",
+        "too_many_requests": "Çok fazla istek gönderildi, lütfen bir süre sonra tekrar deneyiniz.",
+        "validation_failed": "Doğrulama hatası. Lütfen girdiğiniz bilgileri kontrol ediniz."
+    }
+}

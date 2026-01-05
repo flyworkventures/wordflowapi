@@ -1,0 +1,66 @@
+{
+    "enums": {
+        "level": {
+            "a0": "Newest(A0)",
+            "a1": "Beginner (A1)",
+            "a2": "Elementary (A2)",
+            "b1": "Intermediate (B1)",
+            "b2": "Upper Intermediate (B2)",
+            "c1": "Advanced (C1)",
+            "c2": "Proficient (C2)"
+        },
+        "interests": {
+            "basic_information": "Basic Information",
+            "travel": "Travel",
+            "work": "Work",
+            "food_and_drink": "Food and Drink",
+            "daily_tasks": "Daily Tasks",
+            "society": "Society",
+            "popular_words": "Popular Words",
+            "city_transport": "City Transport",
+            "hobbies": "Hobbies",
+            "clothing_and_accessories": "Clothing and Accessories",
+            "nature_and_animals": "Nature and Animals",
+            "relationships": "Relationships",
+            "sport_and_fitness": "Sport and Fitness"
+        }
+    },
+    "auth": {
+        "unauthorized": "Unauthorized access. Please log in.",
+        "user_not_found": "User not found.",
+        "email_already_exists": "This email is already in use.",
+        "register_success": "Registration completed successfully.",
+        "please_login": "Please log in to access this resource.",
+        "invalid_social_token": "Social authentication token is invalid.",
+        "registration_failed_internal": "Registration failed due to an internal error.",
+        "refresh_token_required": "Refresh token is required.",
+        "token_refreshed": "Token refreshed successfully.",
+        "invalid_refresh_token": "Invalid or expired refresh token.",
+        "guest_login_success": "Logged in as guest successfully.",
+        "guest_login_failed": "Guest login failed.",
+        "guest_device_id_required": "Device ID is required for guest login.",
+        "social_login_failed": "Social login verification failed.",
+        "user_no_longer_exists": "The user belonging to this token no longer exists."
+    },
+    "user": {
+        "profile_updated": "Profile updated successfully.",
+        "account_deleted_success": "Your account has been successfully deleted.",
+        "no_data_to_update": "No data provided to update.",
+        "not_found": "User not found."
+    },
+    "error": {
+        "internal_server": "An internal server error occurred.",
+        "db_connection": "Database connection error.",
+        "app_check_invalid": "App Check verification failed.",
+        "already_exists": "This record already exists in our system.",
+        "invalid_relation": "The provided relationship is invalid.",
+        "record_not_found": "The requested record was not found.",
+        "database_error": "A database error occurred.",
+        "integrity_missing": "Device integrity check failed or token missing.",
+        "user_creation_failed": "Failed to create user record.",
+        "untrusted_device": "This device is considered untrusted or compromised.",
+        "invalid_attestation": "Device attestation verification failed.",
+        "too_many_requests": "Too many requests from this IP, please try again later.",
+        "validation_failed": "Validation failed. Please check your input fields."
+    }
+}
