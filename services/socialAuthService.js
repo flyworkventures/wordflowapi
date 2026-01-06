@@ -63,11 +63,36 @@ class SocialAuthService {
             algorithms: ['RS256']
         });
 
+        // 4. İsim bilgisini çıkar (Apple sadece ilk login'de gönderir)
+        let appleName = null;
+        
+        console.log("🍏 [Apple] Token içeriği kontrol ediliyor...");
+        console.log("   - verified.email:", verified.email);
+        console.log("   - verified.name:", verified.name);
+        console.log("   - verified keys:", Object.keys(verified));
+        
+        // Apple token'ında isim bilgisi farklı formatlarda gelebilir
+        if (verified.name) {
+            // Eğer name bir obje ise (firstName, lastName)
+            if (typeof verified.name === 'object') {
+                const firstName = verified.name.firstName || '';
+                const lastName = verified.name.lastName || '';
+                appleName = `${firstName} ${lastName}`.trim() || null;
+                console.log("   ✅ Apple isim bulundu (object):", appleName);
+            } else if (typeof verified.name === 'string') {
+                // Direkt string olarak gelmişse
+                appleName = verified.name;
+                console.log("   ✅ Apple isim bulundu (string):", appleName);
+            }
+        } else {
+            console.log("   ⚠️ Apple token'ında isim bilgisi yok (normal, sadece ilk login'de gelir)");
+        }
+
         // 4. Return Data
         return {
             email: verified.email, // Private relay email olsa bile buradadır
             providerId: verified.sub,
-            name: null,
+            name: appleName, // İsim varsa döndür, yoksa null
             avatar: null
         };
     }

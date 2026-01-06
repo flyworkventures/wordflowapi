@@ -1,0 +1,115 @@
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+}
+
+model Word {
+  id        String   @id @default(uuid()) // Int yerine String ve UUID yaptık
+  word      String   @unique // Sorgulama yaparken kullanacağız
+  level     String   // A1, A2 vb.
+
+  // --- Çeviriler ---
+  translate_en String? @db.Text
+  translate_tr String? @db.Text
+  translate_de String? @db.Text
+
+  // --- Okunuşlar ---
+  pronunciation_en String? @db.Text
+  pronunciation_tr String? @db.Text
+  pronunciation_de String? @db.Text
+
+  // --- Cümleler ---
+  sentence_en String? @db.Text
+  sentence_tr String? @db.Text
+  sentence_de String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id              Int @id @default (autoincrement())
+  name            String @default ("Guest")
+  email           String @unique
+  socialAccounts  SocialAccount[]          
+  level           String
+  learnLanguage   String @default ("en")
+  dailyGoal       Int @default (15)
+  interests       String          
+  isPremium       Boolean @default (false)
+  createdAt       DateTime @default (now())
+  updatedAt       DateTime @updatedAt
+  devicePublicKey String ? @db.Text
+  lastCounter     Int ? @default (0)
+  refreshToken    String ? @db.Text
+  avatar          String ?
+  wordPracticeProgress  Float           @default(0.0)
+  isAnsweredQuestions Boolean @default (false)
+  wordPracticeOffset  Int @default (0)
+  profileSummary      String ? @db.Text
+  readingPracticeOffset Int @default (0) 
+  savedWords      String ? @db.Text
+  language        String @default ("tr")
+  timezone        String @default ("Europe/Istanbul")
+  lastActivityAt DateTime @default (now()) 
+  oneSignalId    String ?  // Player ID
+  lastNotificationLevel String ?
+  lastNotificationSentAt DateTime ?
+  quickReviewProgress   Float    @default(0) 
+  readingTestProgress   Float    @default(0) 
+  dailyTestProgress     Float    @default(0) 
+  totalProgress         Float    @default(0)
+  notifications Notification[]
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  title     String
+  body      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Quiz {
+  id               String   @id @default(uuid())
+  word             String   // Hangi kelimeye ait olduğu
+  correct_answer   String   @db.Text
+  
+  // İngilizce Soru ve Şıklar
+  question_en      String   @db.Text
+  options_en       String   @db.Text // JSON string olarak saklayacağız
+  
+  // Türkçe Soru ve Şıklar
+  question_tr      String   @db.Text
+  options_tr       String   @db.Text
+  
+  // Almanca Soru ve Şıklar
+  question_de      String   @db.Text
+  options_de       String   @db.Text
+
+  createdAt        DateTime @default(now())
+  
+  @@index([word]) // Kelime üzerinden hızlı arama için
+}
+
+model SocialAccount {
+  id          Int @id @default (autoincrement())
+  provider    String   // 'google', 'apple', 'facebook'
+  providerId  String   // Google sub ID veya Apple sub ID
+  userId      Int
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshToken String?  @db.Text
+  createdAt   DateTime @default (now())
+
+    // Aynı provider ID ile (örn: Google ID: 123) birden fazla kayıt olamaz.
+    @@unique([provider, providerId])
+}
+

@@ -1,8 +1,7 @@
 const axios = require('axios');
 const userRepository = require('../repositories/userRepository');
 const AppError = require('../utils/errors/appError');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const { prisma } = require('../config/prisma');
 
 class WordPracticeService {
     constructor() {

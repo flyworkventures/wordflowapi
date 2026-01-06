@@ -6,8 +6,7 @@ const sendResponse = require('../middlewares/responseHandler');
 const catchAsync = require('../utils/errors/catchAsync');
 const AppError = require('../utils/errors/appError');
 const notificationService = require('../services/notificationService');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const { prisma } = require('../config/prisma');
 
 exports.updateProfile = catchAsync(async (req, res, next) => {
     if (!req.user || !req.user.id) {

@@ -5,6 +5,7 @@ const userRepository = require('../repositories/userRepository');
 const AppError = require('../utils/errors/appError');
 const axios = require('axios');
 const bunnyUtils = require('../utils/bunnyUtils');
+const appleUtils = require('../utils/appleUtils');
 
 class UserService {
     async updateProfile(userId, updateData) {

@@ -1,12 +1,10 @@
 // services/scheduler.service.js
 require('dotenv').config();
 const cron = require('node-cron');
-const { PrismaClient } = require('@prisma/client');
+const { prisma } = require('../config/prisma');
 const moment = require('moment-timezone'); // 🔥 Moment aktif
 const NOTIFICATION_RULES = require('../utils/constants/notificationMessages');
 const NotificationService = require('./notificationService');
-
-const prisma = new PrismaClient();
 
 // Varsayılan Zaman Dilimi (Senin için GMT+3)
 const DEFAULT_TIMEZONE = 'Europe/Istanbul';

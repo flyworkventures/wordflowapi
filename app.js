@@ -35,7 +35,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/words', wordRouter);
 app.use('/api/notifications', notificationRoutes);
 
-app.listen(3016, '0.0.0.0', () => {
+app.listen(3016, () => {
     console.log(`🚀 Wordflow Backend 3016 portunda hazır!`);
 
     // Server ayağa kalktıktan sonra Zamanlayıcıyı başlat

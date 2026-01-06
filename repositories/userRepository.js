@@ -56,7 +56,7 @@ class UserRepository {
     }
 
     // Mevcut kullanıcıya yeni bir sosyal hesap bağla
-    async addSocialAccount(userId, provider, providerId) {
+    async addSocialAccount(userId, provider, providerId, refreshToken = null) {
         return await prisma.socialAccount.create({
             data: {
                 userId,

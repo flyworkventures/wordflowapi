@@ -2,6 +2,7 @@ const wordPracticeService = require('../services/wordPracticeService');
 const sendResponse = require('../middlewares/responseHandler');
 const catchAsync = require('../utils/errors/catchAsync');
 const AppError = require('../utils/errors/appError');
+const { prisma } = require('../config/prisma');
 
 exports.getMixedPracticeSession = catchAsync(async (req, res, next) => {
     let userId = req.query.userId || (req.user && req.user.id);

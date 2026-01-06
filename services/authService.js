@@ -5,8 +5,7 @@ const bunnyUtils= require('../utils/bunnyUtils');
 const appleUtils = require('../utils/appleUtils');
 const AppError = require('../utils/errors/appError');
 const { language } = require('googleapis/build/src/apis/language');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const { prisma } = require('../config/prisma');
 
 
 class AuthService {
@@ -34,15 +33,31 @@ class AuthService {
         // ----------------------------------------------
 
         // --- İSİM BELİRLEME MANTIĞI ---
-        let finalName = socialUser.name;
-        if (!finalName && data.name) {
-            finalName = data.name;
+        console.log("🔍 [DEBUG] İsim Kontrolü:");
+        console.log("   - socialUser.name:", socialUser.name);
+        console.log("   - data.name:", data.name);
+        console.log("   - data.provider:", data.provider);
+        
+        // Öncelik sırası: 1) Flutter'dan gelen data.name, 2) Token'dan gelen isim, 3) Varsayılan
+        let finalName = null;
+        
+        // 1. Önce Flutter'dan gelen ismi kontrol et (en yüksek öncelik)
+        if (data.name && data.name.trim() && data.name !== "Guest" && data.name !== "Language Learner") {
+            finalName = data.name.trim();
+            console.log("   ✅ data.name kullanıldı:", finalName);
         }
-        if (!finalName) {
+        // 2. Token'dan gelen ismi kontrol et
+        else if (socialUser.name && socialUser.name.trim() && socialUser.name !== "Guest") {
+            finalName = socialUser.name.trim();
+            console.log("   ✅ socialUser.name kullanıldı:", finalName);
+        }
+        // 3. Varsayılan isim
+        else {
             finalName = "Language Learner";
+            console.log("   ⚠️ Varsayılan isim kullanıldı:", finalName);
         }
 
-        console.log("👉 [2] Email:", socialUser.email, "İsim:", finalName);
+        console.log("👉 [2] Email:", socialUser.email, "Final İsim:", finalName);
 
         // B. Kullanıcı Kontrolü
         let user = await userRepository.findByEmail(socialUser.email);
@@ -50,13 +65,43 @@ class AuthService {
 
         if (user) {
             // ✅ DURUM 1: KULLANICI MEVCUT
-            prisma.user.update({
+            console.log("👤 [Mevcut Kullanıcı] Mevcut isim:", user.name);
+            console.log("👤 [Mevcut Kullanıcı] Gelen finalName:", finalName);
+            
+            // İsim güncelleme: Eğer yeni isim geldiyse ve geçerli bir isimse güncelle
+            // Mevcut isim "Guest" veya "Language Learner" ise veya boşsa, yeni isimle güncelle
+            const shouldUpdateName = finalName && 
+                finalName !== "Guest" && 
+                finalName !== "Language Learner" &&
+                finalName.trim().length > 0 &&
+                (user.name === "Guest" || 
+                 user.name === "Language Learner" || 
+                 !user.name || 
+                 user.name.trim() === "" ||
+                 user.name === null);
+
+            const updateData = {
+                lastActivityAt: new Date(),
+                lastNotificationLevel: null
+            };
+
+            // İsim güncellemesi gerekiyorsa ekle
+            if (shouldUpdateName) {
+                updateData.name = finalName;
+                console.log(`📝 ✅ Kullanıcı ismi güncelleniyor: "${user.name}" -> "${finalName}"`);
+            } else {
+                console.log(`📝 ⏭️ İsim güncellenmedi. Sebep:`, {
+                    finalName: finalName,
+                    mevcutIsim: user.name,
+                    shouldUpdate: shouldUpdateName,
+                    finalNameLength: finalName ? finalName.trim().length : 0
+                });
+            }
+
+            await prisma.user.update({
                 where: { id: user.id },
-                data: {
-                    lastActivityAt: new Date(),
-                    lastNotificationLevel: null
-                }
-            }).catch(err => console.error('Activity update error:', err));
+                data: updateData
+            }).catch(err => console.error('❌ Activity update error:', err));
 
             // Hesap Bağlama Kontrolü
             const accounts = user.socialAccounts || [];
@@ -79,6 +124,15 @@ class AuthService {
             if (data.devicePublicKey) {
                 await userRepository.updateDeviceKey(user.id, data.devicePublicKey);
             }
+
+            // İsim güncellendiyse user objesini de güncelle (response için)
+            if (shouldUpdateName) {
+                user.name = finalName;
+                console.log(`📝 ✅ User objesi güncellendi, yeni isim: ${user.name}`);
+            }
+            
+            // User'ı tekrar çek (güncel veriler için)
+            user = await userRepository.findById(user.id);
 
         } else {
             // ✅ DURUM 2: YENİ KULLANICI
